@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import UserContext from "../../Context/UserContext";
 import axios from "axios";
 
@@ -16,23 +16,26 @@ const AdminLogin = () => {
   const { loginAsAdmin } = useContext(UserContext);
   const navigate = useNavigate(null);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:8000/api/admin/login", {
-        email,
-        password,
-      });
+  const handleLogin = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        const res = await axios.post("http://localhost:8000/api/admin/login", {
+          email,
+          password,
+        });
 
-      if (res?.status === 200) {
-        /* Login as ADMIN */
-        loginAsAdmin(email, res?.data.userId);
-        navigate("/dashboard");
+        if (res?.status === 200) {
+          /* Login as ADMIN */
+          loginAsAdmin(email, res?.data.userId);
+          navigate("/dashboard");
+        }
+      } catch (error) {
+        console.error("Error registering Admin", error);
       }
-    } catch (error) {
-      console.error("Error registering Admin", error);
-    }
-  };
+    },
+    [email, password, navigate, loginAsAdmin]
+  );
 
   return (
     <>

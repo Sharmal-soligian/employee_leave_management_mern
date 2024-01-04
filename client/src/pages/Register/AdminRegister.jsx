@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 
 const AdminRegister = () => {
@@ -15,21 +15,27 @@ const AdminRegister = () => {
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate(null);
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const handleRegister = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:8000/api/admin/register", {
-        email,
-        password,
-      });
+      try {
+        const res = await axios.post(
+          "http://localhost:8000/api/admin/register",
+          {
+            email,
+            password,
+          }
+        );
 
-      if (res?.status === 201) navigate("/admin-login");
-    } catch (error) {
-      console.error("Error registering Admin", error?.response.data);
-      setErrMsg(error?.response?.data?.message);
-    }
-  };
+        if (res?.status === 201) navigate("/admin-login");
+      } catch (error) {
+        console.error("Error registering Admin", error?.response.data);
+        setErrMsg(error?.response?.data?.message);
+      }
+    },
+    [email, password, navigate]
+  );
 
   return (
     <>

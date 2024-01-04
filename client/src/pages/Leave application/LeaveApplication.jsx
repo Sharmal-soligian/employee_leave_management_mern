@@ -6,4 +6,4 @@ const LeaveApplication = () => {
   )
 }
 
-export default LeaveApplication
+export default LeaveApplication;

@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import UserContext from "../../Context/UserContext";
 import axios from "axios";
 
@@ -16,23 +16,29 @@ const EmployeeLogin = () => {
   const { loginAsEmployee } = useContext(UserContext);
   const navigate = useNavigate(null);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:8000/api/employee/login", {
-        email,
-        password,
-      });
+  const handleLogin = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        const res = await axios.post(
+          "http://localhost:8000/api/employee/login",
+          {
+            email,
+            password,
+          }
+        );
 
-      if (res?.status === 200) {
-        /* Login as Employee */
-        loginAsEmployee(email, res?.data.userId);
-        navigate("/leave-application");
+        if (res?.status === 200) {
+          /* Login as Employee */
+          loginAsEmployee(email, res?.data.userId);
+          navigate("/leave-application");
+        }
+      } catch (error) {
+        console.error("Error registering Admin", error);
       }
-    } catch (error) {
-      console.error("Error registering Admin", error);
-    }
-  };
+    },
+    [email, password, navigate, loginAsEmployee]
+  );
 
   return (
     <>

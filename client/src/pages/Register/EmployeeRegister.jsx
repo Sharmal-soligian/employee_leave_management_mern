@@ -10,35 +10,46 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 
 const EmployeeRegister = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate(null);
 
-  const handleRegister = useCallback( async (e) => {
-    e.preventDefault();
+  const handleRegister = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    try {
-      const res = await axios.post("http://localhost:8000/api/employee/register", {
-        email,
-        password,
-      });
+      try {
+        const res = await axios.post(
+          "http://localhost:8000/api/employee/register",
+          {
+            email,
+            password,
+          }
+        );
 
-      if (res?.status === 201) navigate("/employee-login");
-    } catch (error) {
-      console.error("Error registering Admin", error?.response.data);
-      setErrMsg(error?.response?.data?.message);
-    }
-  }, [email, password, navigate]);
+        if (res?.status === 201) navigate("/employee-login");
+      } catch (error) {
+        console.error("Error registering Admin", error?.response.data);
+        setErrMsg(error?.response?.data?.message);
+      }
+    },
+    [email, password, navigate]
+  );
 
   return (
     <>
       <EmployeeRegisterWrapper>
         <CardContainer>
-          <Card sx={{ minWidth: 275, boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)", }}>
+          <Card
+            sx={{
+              minWidth: 275,
+              boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)",
+            }}
+          >
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                <b style={{ color: '#bbb' }}>Employee Register</b>
+                <b style={{ color: "#bbb" }}>Employee Register</b>
               </Typography>
               <TextField
                 id="standard-multiline-flexible"
@@ -73,7 +84,7 @@ const EmployeeRegister = () => {
       </EmployeeRegisterWrapper>
     </>
   );
-}
+};
 
 const EmployeeRegisterWrapper = styled.div`
   display: flex;
@@ -95,4 +106,4 @@ const ErrorMessage = styled.div`
   margin-top: 10px;
 `;
 
-export default EmployeeRegister
+export default EmployeeRegister;
