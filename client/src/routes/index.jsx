@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import UserContext from "../Context/UserContext.js";
 import LoginPage from '../pages/LoginPage.jsx';
 import Layout from '../components/Layout.jsx';
-import LeaveApplication from "../pages/Leave application/LeaveApplication.jsx";
 
 /* Lazy Loadin Components */
 const AdminLogin = lazy(() =>
@@ -25,14 +24,11 @@ const Dashboard = lazy(() =>
 const DepartmentLists = lazy(() =>
   import("../pages/Department Lists/DepartmentLists")
 );
-const EmployeeList = lazy(() =>
-  import("../pages/Employee List/EmployeeList")
-);
-const EmployeeDetails = lazy(() =>
-  import("../pages/Employee Details/EmployeeDetails")
-);
 const LeaveHistory = lazy(() =>
   import("../pages/Leave History/LeaveHistory")
+);
+const LeaveApplication = lazy(() =>
+  import("../pages/Leave application/LeaveApplication.jsx")
 );
 
 const AppRoutes = () => {
@@ -63,18 +59,6 @@ const AppRoutes = () => {
       <Route
         path="/department-list"
         element={<Layout>{<DepartmentLists />}</Layout>}
-      />
-
-      {/* Employee List Route */}
-      <Route
-        path="/employee-list"
-        element={<Layout>{<EmployeeList />}</Layout>}
-      />
-
-      {/* Employee Details Route */}
-      <Route
-        path="/employee-detail"
-        element={<Layout>{<EmployeeDetails />}</Layout>}
       />
 
       {/* Leave History Route */}
