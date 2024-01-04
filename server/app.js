@@ -15,9 +15,13 @@ app.use(cors());
 /* Routes & IMPORTS */
 const adminRoutes = require("./controllers/register/admin/admin.registerController");
 const employeeRoutes = require("./controllers/register/employee/employee.registerController");
+const leaveRoutes = require("./controllers/leave/employee.leaveController");
+const adminLeaveRoutes = require("./controllers/leave/admin.leaveController");
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/employee", employeeRoutes);
+app.use("/api/employee/leave", leaveRoutes);
+app.use("/api/admin/leave", adminLeaveRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server works");
