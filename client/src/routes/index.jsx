@@ -1,4 +1,3 @@
-// routes/index.js
 import React, { lazy, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import UserContext from "../Context/UserContext.js";
