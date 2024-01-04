@@ -1,0 +1,19 @@
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ListIcon from '@mui/icons-material/List';
+import BadgeIcon from '@mui/icons-material/Badge';
+import DetailsIcon from '@mui/icons-material/Details';
+import HistoryIcon from '@mui/icons-material/History';
+import AddIcon from '@mui/icons-material/Add';
+
+export const sidebarDataAdmin = [
+    { path: '/dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
+    { path: '/department-list', label: 'Department List', icon: <ListIcon /> },
+    { path: '/employee-list', label: 'Employee List', icon: <BadgeIcon /> },
+    { path: '/employee-detail', label: 'Employee Details', icon: <DetailsIcon /> }, 
+];
+
+export const sidebarDataEmployee = [
+    { path: '/leave-application', label: 'Leave Application', icon : <AddIcon /> }, 
+    { path: '/leave-history', label: 'Leave History', icon : <HistoryIcon /> }, 
+];
+
